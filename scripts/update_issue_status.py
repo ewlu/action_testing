@@ -85,6 +85,7 @@ def build_new_issue(status: Dict[str, str], patch: str, check: str):
     result += "\n"
     with open("issue.md", "w") as f:
         f.write(result)
+    print(result)
 
 def main():
     args = parse_arguments()
