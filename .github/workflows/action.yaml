@@ -6,6 +6,8 @@ on:
 jobs:
   build-issue:
     runs-on: ubuntu-20.04
+    permissions:
+      issues: write
     steps:
       - name: Create build pending issue
         run: |
