@@ -9,6 +9,9 @@ on:
       target:
         required: true
         type: string
+      multilib:
+        required: true
+        type: string
       issue_num:
         required: true
         type: string
@@ -22,9 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: sleep
+        run: |
+          sleep $((RANDOM % 10))
+
       - name: Update pending issue
         run: |
-          python scripts/update_issue_status.py -token ${{ secrets.GITHUB_TOKEN }} -state pending -patch first -target ${{ inputs.mode }}-${{ inputs.target }} -check 'Test' -repo ewlu/action_testing
+          python scripts/update_issue_status.py -token ${{ secrets.GITHUB_TOKEN }} -state pending -patch first -target ${{ inputs.mode }}-${{ inputs.target }}-${{ inputs.multilib }} -check 'Test' -repo ewlu/action_testing
           echo "Associated run: not init" >> issue.md
 
       - name: Create build report issue
