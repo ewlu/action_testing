@@ -77,7 +77,7 @@ jobs:
 
       - name: sleep
         run: |
-          sleep $((RANDOM % 10))
+          sleep $((RANDOM % 30))
 
       - name: Update pending issue
         run: |
@@ -96,7 +96,7 @@ jobs:
 
       - name: sleep
         run: |
-          sleep 60
+          sleep $((RANDOM % 60 + 60)
 
       - name: Update pending issue
         run: |
