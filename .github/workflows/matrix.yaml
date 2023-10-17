@@ -33,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: issue.md
+          content-filepath: issue.md
           title: 'Test Status 1'
           issue-number: ${{ inputs.issue_num }}
 
@@ -52,6 +52,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          filename: issue.md
+          content-filepath: issue.md
           title: 'Test Status 1'
           issue-number: ${{ inputs.issue_num }}
