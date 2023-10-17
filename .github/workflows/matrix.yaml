@@ -68,7 +68,7 @@ jobs:
           issue-number: ${{ inputs.issue_num }}
   build-sh:
     if: ${{ inputs.self_hosted == 'true' }}
-    runs-on: ubuntu-20.04
+    runs-on: [self-hosted]
     environment: production
     permissions:
       issues: write
