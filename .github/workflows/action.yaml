@@ -51,6 +51,7 @@ jobs:
       target: ${{ matrix.target }}
       multilib: ${{ matrix.multilib }}
       issue_num: ${{ needs.build-issue.outputs.issue_num }} 
+      self_hosted: 'false'
 
   csreg: # Check Regressions. Short name so I can see the matrix string in github
     needs: [build-issue]
@@ -70,6 +71,7 @@ jobs:
       target: ${{ matrix.target }}
       multilib: ${{ matrix.multilib }}
       issue_num: ${{ needs.build-issue.outputs.issue_num }} 
+      self_hosted: 'false'
 
   chreg: # Check Regressions. Short name so I can see the matrix string in github
     needs: [build-issue]
@@ -89,3 +91,4 @@ jobs:
       target: ${{ matrix.target }}
       multilib: ${{ matrix.multilib }}
       issue_num: ${{ needs.build-issue.outputs.issue_num }} 
+      self_hosted: 'true'

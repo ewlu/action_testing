@@ -15,9 +15,13 @@ on:
       issue_num:
         required: true
         type: string
+      self_hosted:
+        required: true
+        type: string
 
 jobs:
   build:
+    if: ${{ inputs.self_hosted == 'true' }}
     runs-on: ubuntu-20.04
     environment: production
     permissions:
