@@ -1,0 +1,55 @@
+name: Matrix
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        required: true
+        type: string
+      target:
+        required: true
+        type: string
+      issue_num:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    environment: production
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update pending issue
+        run: |
+          python scripts/update_issue_status.py -token ${{ secrets.GITHUB_TOKEN }} -state pending -patch first -target ${{ inputs.mode }}-${{ inputs.target }} -check 'Test' -repo ewlu/action_testing
+          echo "Associated run: not init" >> issue.md
+
+      - name: Create build report issue
+        uses: peter-evans/create-issue-from-file@v4
+        id: create-issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: issue.md
+          title: 'Test Status 1'
+          issue-number: ${{ inputs.issue_num }}
+
+      - name: sleep
+        run: |
+          sleep 60
+
+      - name: Update pending issue
+        run: |
+          python scripts/update_issue_status.py -token ${{ secrets.GITHUB_TOKEN }} -state passed -patch first -target ${{ inputs.mode }}-${{ inputs.target }} -check 'Test' -repo ewlu/action_testing
+          echo "Associated run: not init" >> issue.md
+
+      - name: Create build report issue
+        uses: peter-evans/create-issue-from-file@v4
+        id: update-issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          filename: issue.md
+          title: 'Test Status 1'
+          issue-number: ${{ inputs.issue_num }}

@@ -1,0 +1,63 @@
+name: Test
+
+jobs:
+  build-issue:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Create build pending issue
+        run: |
+          echo "Associated run: init" > issue.md
+          
+
+      - name: Create build report issue
+        uses: peter-evans/create-issue-from-file@v4
+        id: create-issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          content-filepath: issue.md
+          title: 'Test Status 1'
+
+      - name: check new issue number
+        id: issue
+        run: |
+          export ISSUE_NUMER=${{ steps.create-issue.outputs.number }}
+          echo $ISSUE_NUMBER
+          echo "issue_num=$ISSUE_NUMBER" >> $GITHUB_OUTPUT
+
+    outputs:
+      issue_num: ${{ steps.issue.outputs.issue_num }} 
+
+  creg: # Check Regressions. Short name so I can see the matrix string in github
+    needs: [build-issue]
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [mode_a]
+        target:
+          [
+            target_a,
+            target_b
+          ]
+    uses: ./.github/workflows/matrix.yaml
+    with:
+      mode: ${{ matrix.mode }}
+      target: ${{ matrix.target }}
+      issue_num: ${{ needs.build-issue.outputs.issue_num }} 
+
+  csreg: # Check Regressions. Short name so I can see the matrix string in github
+    needs: [build-issue]
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: [mode_a]
+        target:
+          [
+            target_a,
+            target_b
+          ]
+    uses: ./.github/workflows/matrix.yaml
+    with:
+      mode: ${{ matrix.mode }}
+      target: ${{ matrix.target }}
+
