@@ -88,3 +88,4 @@ jobs:
       mode: ${{ matrix.mode }}
       target: ${{ matrix.target }}
       multilib: ${{ matrix.multilib }}
+      issue_num: ${{ needs.build-issue.outputs.issue_num }} 
