@@ -38,11 +38,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [mode_a]
+        mode: [linux, newlib]
         target:
           [
-            target_a,
-            target_b
+            rv32gc,
+            rv64gc_zba_zbb_zbc
           ]
     uses: ./.github/workflows/matrix.yaml
     with:
