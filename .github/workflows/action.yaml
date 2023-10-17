@@ -63,4 +63,5 @@ jobs:
     with:
       mode: ${{ matrix.mode }}
       target: ${{ matrix.target }}
+      issue_num: ${{ needs.build-issue.outputs.issue_num }} 
 
