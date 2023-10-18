@@ -25,19 +25,19 @@ jobs:
         run: |
           echo "outcome: ${{ steps.outcome.outcome }} status: ${{ steps.status.outputs.status }} "
           
-      # - name: Create build pending issue
-      #   run: |
-      #     echo "Associated run: init" > issue.md
+      - name: Create build pending issue
+        run: |
+          echo "Associated run: init {{" > issue.md
           
 
-    #   - name: Create build report issue
-    #     uses: peter-evans/create-issue-from-file@v4
-    #     id: create-issue
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #     with:
-    #       content-filepath: issue.md
-    #       title: 'Test Status 1'
+      - name: Create build report issue
+        uses: peter-evans/create-issue-from-file@v4
+        id: create-issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          content-filepath: issue.md
+          title: 'Test Status 1'
 
     #   - name: check new issue number
     #     id: issue
