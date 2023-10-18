@@ -21,7 +21,7 @@ jobs:
           false
         continue-on-error: true
 
-      - name:
+      - name: something
         run: |
           echo "outcome: ${{ steps.outcome.outcome }} status: ${{ steps.status.outputs.status }} "
           
