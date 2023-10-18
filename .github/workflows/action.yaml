@@ -6,8 +6,8 @@ on:
 jobs:
   build-issue:
     runs-on: ubuntu-20.04
-    permissions:
-      issues: write
+    # permissions:
+    #   issues: write
     steps:
       - name: fail
         id: outcome
@@ -15,7 +15,7 @@ jobs:
           false
         continue-on-error: true
 
-      - name: fail
+      - name: fsdfasdf
         id: status
         run: |
           false
