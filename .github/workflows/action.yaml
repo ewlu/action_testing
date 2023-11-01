@@ -16,7 +16,11 @@ jobs:
       - name: Print space
         run: |
           cat /proc/swaps
-          grep '^Swaps' /proc/meminfo
+          
+          
+      - name: Print space
+        run: |
+          grep '^Swap' /proc/meminfo
 
     #   - name: check new issue number
     #     id: issue
