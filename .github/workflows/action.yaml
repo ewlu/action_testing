@@ -22,6 +22,10 @@ jobs:
         run: |
           grep '^Swap' /proc/meminfo
 
+      - name: Print mem
+        run: |
+          grep '^Mem' /proc/meminfo
+
     #   - name: check new issue number
     #     id: issue
     #     run: |
