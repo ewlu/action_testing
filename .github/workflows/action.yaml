@@ -13,7 +13,7 @@ jobs:
         run: |
           df -h
 
-    - name: Print space
+      - name: Print space
         run: |
           cat /proc/swaps
           grep '^Swaps' /proc/meminfo
