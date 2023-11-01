@@ -9,35 +9,14 @@ jobs:
     # permissions:
     #   issues: write
     steps:
-      - name: fail
-        id: outcome
+      - name: Print space
         run: |
-          false
-        continue-on-error: true
+          df -h
 
-      - name: fsdfasdf
-        id: status
+    - name: Print space
         run: |
-          false
-        continue-on-error: true
-
-      - name: something
-        run: |
-          echo "outcome: ${{ steps.outcome.outcome }} status: ${{ steps.status.outputs.status }} "
-          
-      - name: Create build pending issue
-        run: |
-          echo "Associated run: init {{" > issue.md
-          
-
-      - name: Create build report issue
-        uses: peter-evans/create-issue-from-file@v4
-        id: create-issue
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          content-filepath: issue.md
-          title: 'Test Status 1'
+          cat /proc/swaps
+          grep '^Swaps' /proc/meminfo
 
     #   - name: check new issue number
     #     id: issue
