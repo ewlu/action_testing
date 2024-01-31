@@ -1,0 +1,3 @@
+[submodule "glibc-cicd"]
+	path = glibc-cicd
+	url = https://gitlab.com/ewlu/glibc-cicd.git
