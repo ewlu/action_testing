@@ -22,7 +22,7 @@ jobs:
 
       - name: Test
         run: |
-          git clone https://gitlab.com/ewlu/glibc-cicd.git
+          git submodule update --init glibc-cicd
           python glibc-cicd/curator.py poll
           ls
 
