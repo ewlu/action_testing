@@ -18,7 +18,7 @@ jobs:
           sudo apt remove python3-pip
           wget https://bootstrap.pypa.io/get-pip.py
           sudo python3 get-pip.py
-          pip install -U pyopenssl cryptography mariadb==1.0.11 gnupg requests 
+          pip install -U pyopenssl cryptography mariadb==1.0.11 gnupg requests pygit2
           python scripts/test.py
           
 
