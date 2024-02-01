@@ -20,9 +20,12 @@ jobs:
           sudo python3 get-pip.py
           pip install -U pyopenssl cryptography mariadb==1.0.11 gnupg requests pygit2
 
-      - name: Test
+      - name: Update
         run: |
           git submodule update --init glibc-cicd
+
+      - name: Test
+        run: |
           python glibc-cicd/curator.py poll
           ls
 
