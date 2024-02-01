@@ -23,6 +23,8 @@ jobs:
       - name: Update
         run: |
           git submodule update --init glibc-cicd
+          ls
+          cat glibc-cicd/curator.py
 
       - name: Test
         run: |
