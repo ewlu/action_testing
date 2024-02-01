@@ -24,9 +24,14 @@ jobs:
       - name: Update
         run: |
           git submodule update --init glibc-cicd
+          git submodule update --init riscv-gnu-toolchain
           ls
           cat glibc-cicd/curator.py
           python scripts/test.py
+          cd riscv-gnu-toolchain
+          git branch
+          git checkout master
+          git branch
 
       - name: Test
         run: |
