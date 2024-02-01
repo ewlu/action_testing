@@ -3,4 +3,4 @@
 	url = https://gitlab.com/ewlu/glibc-cicd.git
 [submodule "riscv-gnu-toolchain"]
 	path = riscv-gnu-toolchain
-	url = git@github.com:patrick-rivos/riscv-gnu-toolchain.git
+	url = https://github.com/patrick-rivos/riscv-gnu-toolchain.git
