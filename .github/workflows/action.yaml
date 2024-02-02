@@ -41,5 +41,14 @@ jobs:
       - name: Show disk usage
         run: |
           du -sh /opt/*
+          echo
           du -sh /usr/*
+          echo
+          du -sh /opt/hostedtoolcache/*
+          echo
+          du -sh /usr/lib/*
+          echo
+          du -sh /usr/local/*
+          echo
+          du -sh /usr/share/*
 
