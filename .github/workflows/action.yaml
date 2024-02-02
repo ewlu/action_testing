@@ -50,7 +50,7 @@ jobs:
           echo "========"
           du -sh /usr/local/*
           echo "========"
-          du -sh /usr/local/share*
+          du -sh /usr/local/share/*
           echo "========"
           du -sh /usr/share/*
 
