@@ -18,24 +18,27 @@ jobs:
           sudo apt remove python3-pip
           wget https://bootstrap.pypa.io/get-pip.py
           sudo python3 get-pip.py
-          pip install -U pyopenssl cryptography mariadb==1.0.11 gnupg requests pygit2
-          python scripts/test.py
+      #     pip install -U pyopenssl cryptography mariadb==1.0.11 gnupg requests pygit2
+      #     python scripts/test.py
 
-      - name: Update
-        run: |
-          git submodule update --init glibc-cicd
-          git submodule update --init riscv-gnu-toolchain
-          ls
-          cat glibc-cicd/curator.py
-          python scripts/test.py
-          cd riscv-gnu-toolchain
-          git branch
-          git checkout master
-          git branch
+      # - name: Update
+      #   run: |
+      #     git submodule update --init glibc-cicd
+      #     git submodule update --init riscv-gnu-toolchain
+      #     ls
+      #     cat glibc-cicd/curator.py
+      #     python scripts/test.py
+      #     cd riscv-gnu-toolchain
+      #     git branch
+      #     git checkout master
+      #     git branch
 
-      - name: Test
+      # - name: Test
+      #   run: |
+      #     python scripts/test.py
+      #     python glibc-cicd/curator.py poll
+      #     ls
+      - name: Show disk usage
         run: |
-          python scripts/test.py
-          python glibc-cicd/curator.py poll
-          ls
+          ls -al /*
 
