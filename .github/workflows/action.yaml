@@ -40,5 +40,5 @@ jobs:
       #     ls
       - name: Show disk usage
         run: |
-          ls -al /*
+          du -sh /*
 
