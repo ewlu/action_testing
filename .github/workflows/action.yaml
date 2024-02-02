@@ -41,14 +41,16 @@ jobs:
       - name: Show disk usage
         run: |
           du -sh /opt/*
-          echo
+          echo "========"
           du -sh /usr/*
-          echo
+          echo "========"
           du -sh /opt/hostedtoolcache/*
-          echo
+          echo "========"
           du -sh /usr/lib/*
-          echo
+          echo "========"
           du -sh /usr/local/*
-          echo
+          echo "========"
+          du -sh /usr/local/share*
+          echo "========"
           du -sh /usr/share/*
 
