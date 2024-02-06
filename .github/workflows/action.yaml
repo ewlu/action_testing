@@ -21,10 +21,10 @@ jobs:
       #     pip install -U pyopenssl cryptography mariadb==1.0.11 gnupg requests pygit2
       #     python scripts/test.py
 
-      # - name: Update
-      #   run: |
-      #     git submodule update --init glibc-cicd
-      #     git submodule update --init riscv-gnu-toolchain
+      - name: Update
+        run: |
+          git submodule update --init glibc-cicd
+          git submodule update --init riscv-gnu-toolchain
       #     ls
       #     cat glibc-cicd/curator.py
       #     python scripts/test.py
@@ -54,4 +54,31 @@ jobs:
           # echo "========"
           # du -sh /usr/share/*
           grep binfmt /proc/mounts
+          ls /proc/sys/fs/binfmt_misc
+          CUR_DIR=pwd
+          cd /proc/sys/fs/binfmt_misc
+          
+          echo ':qemu-riscv64:M::\x7f\x45\x4c\x46\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xf3\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:$CUR_DIR/riscv-gnu-toolchain/scripts/wrapper/qemu/riscv64-unknown-linux-gnu-run:PCOF' > register
+          echo ':qemu-riscv32:M::\x7f\x45\x4c\x46\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xf3\x00:\xff\xff\xff\xff\xff\xff\xff\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:$CUR_DIR/riscv-gnu-toolchain/scripts/wrapper/qemu/riscv32-unknown-linux-gnu-run:PCOF' > register
+          ls /proc/sys/fs/binfmt_misc
 
+      - name: Build linux
+        run: |
+          cd riscv-gnu-toolchain
+          mkdir build
+          cd build
+          ../configure --prefix=$(pwd) --with-multilib-generator="rv64gc-lp64d--"
+          make linux -j $(nproc)
+          
+      - name: Build qemu
+        run: |
+          cd riscv-gnu-toolchain
+          cd build
+          make stamps/build-qemu -j $(nproc)
+
+      - name: Run
+        run: |
+          cd riscv-gnu-toolchain
+          cd build
+          make check-glibc-linux -j $(nproc)
+      
