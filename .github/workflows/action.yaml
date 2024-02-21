@@ -16,15 +16,13 @@ jobs:
         run: |
           echo "list=build-glibc-linux-rv64gcv,build-glibc-linux-rv32gcv" >> $GITHUB_OUTPUT
           
-      - name: Build qemu
-        uses: ./.github/workflows/matrix.yaml
-        strategy:
-          fail-fast: false
-          matrix: 
-            target:
-              [
-                ${{ steps.some-id.outputs.list }},
-              ]
-        with:
-          target: ${{ matrix.target }}
+  run-matrix: 
+    uses: ./.github/workflows/matrix.yaml
+    strategy:
+      fail-fast: false
+      matrix: 
+        target:
+          [ "${{ steps.some-id.outputs.list }}" ]
+    with:
+      target: ${{ matrix.target }}
           
