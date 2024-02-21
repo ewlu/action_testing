@@ -15,14 +15,17 @@ jobs:
         id: some-id
         run: |
           echo "list=build-glibc-linux-rv64gcv,build-glibc-linux-rv32gcv" >> $GITHUB_OUTPUT
+    outputs:
+      list: ${{ steps.some-id.outputs.list }}
           
   run-matrix: 
+    needs: [ build-issue ]
     uses: ./.github/workflows/matrix.yaml
     strategy:
       fail-fast: false
       matrix: 
         target:
-          [ "${{ steps.some-id.outputs.list }}" ]
+          [ "${{ needs.build-issue.outputs.list }}" ]
     with:
       target: ${{ matrix.target }}
           
