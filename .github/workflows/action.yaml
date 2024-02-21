@@ -14,7 +14,7 @@ jobs:
       - name: Build linux
         id: some-id
         run: |
-          echo "list=build-glibc-linux-rv64gcv,build-glibc-linux-rv32gcv" >> $GITHUB_OUTPUT
+          echo "list=\"build-glibc-linux-rv64gcv\",\"build-glibc-linux-rv32gcv\"" >> $GITHUB_OUTPUT
     outputs:
       list: ${{ steps.some-id.outputs.list }}
           
