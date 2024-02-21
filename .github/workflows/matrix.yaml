@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-    if: ${{ inputs.self_hosted == 'false' }}
     runs-on: ubuntu-20.04
     environment: production
     permissions:
