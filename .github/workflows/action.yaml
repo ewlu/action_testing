@@ -18,13 +18,13 @@ jobs:
       - name: echo arch info
         run: |
           cd dockerfile
-          docker build --platform linux/amd64/v3 . -t tester:latest
+          docker build --platform linux/amd64/v3 . -t tester:latest --no-cache
         continue-on-error: true
 
       - name: echo arch info
         run: |
           cd dockerfile
-          docker build --platform linux/x86_64/v8 . -t tester:latest
+          docker build --platform linux/riscv64 . -t tester:latest
         continue-on-error: true
         
       - name: echo arch info
