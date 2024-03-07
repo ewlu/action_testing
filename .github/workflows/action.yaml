@@ -28,6 +28,13 @@ jobs:
           docker system prune -a -f
           docker build --no-cache --platform=linux/riscv64 . -t tester:latest
         continue-on-error: true
+
+      - name: echo arch info
+        run: |
+          cd dockerfile
+          docker system prune -a -f
+          docker build --no-cache . -t tester:latest
+        continue-on-error: true
         
       - name: echo arch info
         run: |
