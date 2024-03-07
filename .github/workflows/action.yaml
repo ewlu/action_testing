@@ -26,7 +26,11 @@ jobs:
           cd dockerfile
           docker build --platform linux/x86_64/v8 . -t tester:latest
         continue-on-error: true
-
+        
+      - name: echo arch info
+        run: |
+          cd dockerfile
+          docker image inspect tester:latest
       
       # - name: Build linux
       #   id: some-id
