@@ -16,8 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: echo hi
+      - name: echo workflow
         run:
-          echo '${{ inputs.target }}'
+          echo '${{ github.workflow }}'
 
      
