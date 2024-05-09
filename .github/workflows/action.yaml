@@ -40,7 +40,8 @@ jobs:
       - name: chroot
         run: |
           ls
-          chmod +x ./run_glibc.sh
+          chmod 777 ./run_glibc.sh
+          sudo cp ./run_glibc.sh /mnt/gentoo/
           sudo chroot /mnt/gentoo /bin/bash ./run_glibc.sh
           pwd
           env-update && source /etc/profile
