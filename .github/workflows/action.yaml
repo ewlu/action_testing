@@ -11,67 +11,23 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: echo arch info
-      #   id: test
-      #   run: |
-      #     echo $(arch)
-      #     sudo apt install qemu-user-static -y
-      #     echo "something=rv32gcv-ilp32d" >> $GITHUB_OUTPUT
-
-      - name: print workflow
+      - name: install dependencies
         run: |
-          echo "${{ github.workflow }}
+          sudo apt install qemu-user-static
+          sudo apt install binfmt-support
+          sudo sed -i 's|interpreter .*|interpreter /usr/bin/qemu-riscv64-static|' /usr/share/binfmts/qemu-riscv64
+          sudo update-binfmts --importdir /usr/share/binfmts --import qemu-riscv64
+          cat /proc/sys/fs/binfmt_misc/qemu-riscv64
           
-      # - name: test
-      #   run: |
-      #     if [[ ${{ steps.test.outputs.something }} = rv64* ]];
-      #     then
-      #       echo "hi"
-      #     else
-      #       echo "bye"
-      #     fi
-
-      # - name: echo arch info
-      #   run: |
-      #     cd dockerfile
-      #     docker system prune -a -f
-      #     docker build --no-cache --platform=linux/amd64/v3 . -t tester:latest
-      #   continue-on-error: true
-
-      # - name: echo arch info
-      #   run: |
-      #     cd dockerfile
-      #     docker system prune -a -f
-      #     docker build --no-cache --platform=linux/riscv64 . -t tester:latest
-      #   continue-on-error: true
-
-      # - name: echo arch info
-      #   run: |
-      #     cd dockerfile
-      #     docker system prune -a -f
-      #     docker build --no-cache . -t tester:latest
-      #   continue-on-error: true
-        
-      # - name: echo arch info
-      #   run: |
-      #     cd dockerfile
-      #     docker image inspect tester:latest
-      
-      # - name: Build linux
-      #   id: some-id
-      #   run: |
-      #     echo "list=[\"build-glibc-linux-rv64gcv\",\"build-glibc-linux-rv32gcv\"]" >> $GITHUB_OUTPUT
-    # outputs:
-      # list: ${{ steps.some-id.outputs.list }}
-          
-  run-matrix: 
-    # needs: [ build-issue ]
-    uses: ./.github/workflows/matrix.yaml
-    # strategy:
-    #   fail-fast: false
-    #   matrix: 
-    #     target:
-    #       ${{ fromJson(needs.build-issue.outputs.list) }}
-    with:
-      target: hi
+    
+  # run-matrix: 
+  #   # needs: [ build-issue ]
+  #   uses: ./.github/workflows/matrix.yaml
+  #   # strategy:
+  #   #   fail-fast: false
+  #   #   matrix: 
+  #   #     target:
+  #   #       ${{ fromJson(needs.build-issue.outputs.list) }}
+  #   with:
+  #     target: hi
           
