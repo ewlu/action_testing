@@ -39,7 +39,7 @@ jobs:
 
       - name: chroot
         run: |
-          sudo chroot /mnt/gentoo /bin/bash -c pwd
+          sudo chroot /mnt/gentoo /bin/bash run_glibc.sh
           pwd
           env-update && source /etc/profile
     
