@@ -39,7 +39,8 @@ jobs:
 
       - name: chroot
         run: |
-          sudo chroot /mnt/gentoo /bin/bash
+          sudo chroot /mnt/gentoo /bin/bash -c pwd
+          pwd
           env-update && source /etc/profile
     
   # run-matrix: 
