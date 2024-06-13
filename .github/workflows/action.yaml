@@ -1,7 +1,12 @@
 name: Test
 
 on:
-  push
+  push:
+    branches:
+      main
+  pull_request:
+    branches:
+      main
 
 jobs:
   build-issue:
@@ -10,6 +15,10 @@ jobs:
       issues: write
     steps:
       - uses: actions/checkout@v3
+
+      - name: echo
+        run: |
+          echo ${{ github.base_ref }}
 
       - name: install dependencies
         run: |
