@@ -18,7 +18,7 @@ jobs:
 
       - name: echo
         run: |
-          echo ${{ github.base_ref }}
+          echo ${{ github.event.pull_request.head.ref }}
 
       - name: install dependencies
         run: |
