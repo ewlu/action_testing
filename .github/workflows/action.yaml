@@ -1,9 +1,25 @@
 name: Test
 
 on:
-  push
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    branches:
+      - main
+  
 
 jobs:
+  test-job:
+    runs-on: ubuntu-22.04
+    if: ${{ github.event.workflow_dispatch == 'true' }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: echo
+        run: |
+          echo ${{ github.event.workflow_dispatch }}
+        
   build-issue:
     runs-on: ubuntu-22.04
     permissions:
