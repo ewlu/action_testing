@@ -27,40 +27,44 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: install dependencies
+      - name: test
         run: |
-          sudo apt update
-          sudo apt install qemu-user-static
-          sudo apt install binfmt-support
-          sudo sed -i 's|interpreter .*|interpreter /usr/bin/qemu-riscv64-static|' /usr/share/binfmts/qemu-riscv64
-          sudo update-binfmts --importdir /usr/share/binfmts --import qemu-riscv64
-          cat /proc/sys/fs/binfmt_misc/qemu-riscv64
+          echo "hi" | grep "something"
+
+      # - name: install dependencies
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install qemu-user-static
+      #     sudo apt install binfmt-support
+      #     sudo sed -i 's|interpreter .*|interpreter /usr/bin/qemu-riscv64-static|' /usr/share/binfmts/qemu-riscv64
+      #     sudo update-binfmts --importdir /usr/share/binfmts --import qemu-riscv64
+      #     cat /proc/sys/fs/binfmt_misc/qemu-riscv64
       
-      - name: download things
-        run: |
-          wget https://github.com/negge/riscv-vm/releases/download/20231027/RISCV-DevEnv-2023-10-27.tar.xz
-          tar -xf RISCV-DevEnv-2023-10-27.tar.xz
+      # - name: download things
+      #   run: |
+      #     wget https://github.com/negge/riscv-vm/releases/download/20231027/RISCV-DevEnv-2023-10-27.tar.xz
+      #     tar -xf RISCV-DevEnv-2023-10-27.tar.xz
 
-      - name: run mounting
-        run: |
-          cd RISCV-DevEnv-2023-10-27
-          sudo mkdir /mnt/gentoo
-          sudo mount -o loop,offset=1048576 gentoo.img /mnt/gentoo
-          sudo cp /etc/resolv.conf /mnt/gentoo/etc
-          sudo mount --bind /proc /mnt/gentoo/proc
-          sudo mount --bind /sys /mnt/gentoo/sys
-          sudo mount --bind /dev /mnt/gentoo/dev
-          sudo mount --bind /dev/pts /mnt/gentoo/dev/pts
-          sudo mount --bind /dev/shm /mnt/gentoo/dev/shm
+      # - name: run mounting
+      #   run: |
+      #     cd RISCV-DevEnv-2023-10-27
+      #     sudo mkdir /mnt/gentoo
+      #     sudo mount -o loop,offset=1048576 gentoo.img /mnt/gentoo
+      #     sudo cp /etc/resolv.conf /mnt/gentoo/etc
+      #     sudo mount --bind /proc /mnt/gentoo/proc
+      #     sudo mount --bind /sys /mnt/gentoo/sys
+      #     sudo mount --bind /dev /mnt/gentoo/dev
+      #     sudo mount --bind /dev/pts /mnt/gentoo/dev/pts
+      #     sudo mount --bind /dev/shm /mnt/gentoo/dev/shm
 
-      - name: chroot
-        run: |
-          ls
-          chmod 777 ./run_glibc.sh
-          sudo cp ./run_glibc.sh /mnt/gentoo/
-          sudo chroot /mnt/gentoo /bin/bash ./run_glibc.sh
-          pwd
-          env-update && source /etc/profile
+      # - name: chroot
+      #   run: |
+      #     ls
+      #     chmod 777 ./run_glibc.sh
+      #     sudo cp ./run_glibc.sh /mnt/gentoo/
+      #     sudo chroot /mnt/gentoo /bin/bash ./run_glibc.sh
+      #     pwd
+      #     env-update && source /etc/profile
     
   # run-matrix: 
   #   # needs: [ build-issue ]
