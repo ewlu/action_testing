@@ -19,7 +19,7 @@ jobs:
       - name: echo
         run: |
           echo ${{ github.event.workflow_dispatch }}
-          ISSUE_NAME='Coordination Branch Testsuite Status f3fecf54f0a91e8a9b65e1ce6b984324654b2e2d'
+          ISSUE_NAME='Coordination Branck xty setj'
           curl -L \
             -H "Accept: application/vnd.github+json" \
             -H "Authorization: Token ${{ secrets.GITHUB_TOKEN }}" \
@@ -29,8 +29,8 @@ jobs:
           FOUND_ISSUE=$(cat issues.txt | jq "map(select(.title == \"$ISSUE_NAME\"))" | tr '\n' ' ')
           OTHER_ISSUE='[]'
           # if no issue of that name is found, jq returns '[]'
-          echo "found_issue={$FOUND_ISSUE}" >> $GITHUB_OUTPUT
-          echo "other_issue={$OTHER_ISSUE}" >> $GITHUB_OUTPUT
+          echo "found_issue=$FOUND_ISSUE" >> $GITHUB_OUTPUT
+          echo "other_issue=$OTHER_ISSUE" >> $GITHUB_OUTPUT
         
   build-issue:
     runs-on: ubuntu-22.04
