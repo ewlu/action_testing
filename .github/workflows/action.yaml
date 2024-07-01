@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
     branches:
       - main
-  
 
 jobs:
   test-job:
@@ -24,6 +23,11 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo $GITHUB_CONTEXT
+
+      - name: echo
+        if: github.event.pull_request
+        run: |
+          echo ${{ github.event.pull_request.html_url }} 
         
   build-issue:
     runs-on: ubuntu-22.04
@@ -32,7 +36,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: test
+      - name: echo
+        run: |
+          echo ${{ github.event.pull_request.head.ref }}
+
+      - name: install dependencies
         run: |
           echo "hi" | grep "something"
 
