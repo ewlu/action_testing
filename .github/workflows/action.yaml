@@ -23,6 +23,10 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo $GITHUB_CONTEXT
+
+      - name: echo
+        run: |
+          echo ${{ github.event.pull_request.html_url }} 
         
   build-issue:
     runs-on: ubuntu-22.04
