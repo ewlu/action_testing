@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-22.04
     # if: ${{ github.event.workflow_dispatch == 'true' }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: echo
         env:
@@ -30,11 +30,23 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: test
         run: |
-          echo "hi" | grep "something"
+          cat ./test.txt ./text.txt > double.txt
+          echo "title" > content.md
+          echo "[download link](./double.txt)" >> content.md
+          stat double.txt
+
+      - name: Create or update summary issue
+        uses: peter-evans/create-issue-from-file@v5
+        id: create-issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          content-filepath: ./content.md
+          title: test
 
       # - name: install dependencies
       #   run: |
