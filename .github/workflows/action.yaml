@@ -39,14 +39,31 @@ jobs:
           echo "[download link](./double.txt)" >> content.md
           stat double.txt
 
+      - name: Upload test
+        uses: actions/upload-artifact@v4
+        id: output-id
+        with:
+          name: test-summary
+          path: |
+            ./content.md
+          retention-days: 90
+
+      - name: test
+        run: |
+          echo "title" > new.md
+          echo "[download link](${{ steps.output-id.outputs.artifact-url)" >> new.md
+          stat new.md
+
       - name: Create or update summary issue
         uses: peter-evans/create-issue-from-file@v5
         id: create-issue
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          content-filepath: ./content.md
+          content-filepath: ./new.md
           title: test
+
+      
 
       # - name: install dependencies
       #   run: |
