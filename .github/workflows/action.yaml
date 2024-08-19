@@ -34,7 +34,7 @@ jobs:
 
       - name: test
         run: |
-          cat ./test.txt ./text.txt > double.txt
+          cat ./test.txt ./test.txt > double.txt
           echo "title" > content.md
           echo "[download link](./double.txt)" >> content.md
           stat double.txt
