@@ -51,7 +51,7 @@ jobs:
       - name: test
         run: |
           echo "title" > new.md
-          echo "[download link](${{ steps.output-id.outputs.artifact-url)" >> new.md
+          echo "[download link](${{ steps.output-id.outputs.artifact-url }})" >> new.md
           stat new.md
 
       - name: Create or update summary issue
