@@ -32,7 +32,7 @@ jobs:
       - name: test
         if: ${{ !cancelled() }}
         run: |
-          echo "success ${{ success() }} failure ${{ failure() }}"
+          echo "something"
 
         
   # build-issue:
