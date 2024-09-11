@@ -24,44 +24,54 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo $GITHUB_CONTEXT
+
+      - name: exit
+        run: |
+          exit 1
+
+      - name: test
+        if: ${{ !cancelled() }}
+        run: |
+          echo "success ${{ success() }} failure ${{ failure() }}"
+
         
-  build-issue:
-    runs-on: ubuntu-22.04
-    permissions:
-      issues: write
-    steps:
-      - uses: actions/checkout@v4
+  # build-issue:
+  #   runs-on: ubuntu-22.04
+  #   permissions:
+  #     issues: write
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: test
-        run: |
-          cat ./test.txt ./test.txt > double.txt
-          echo "title" > content.md
-          echo "[download link](./double.txt)" >> content.md
-          stat double.txt
+  #     - name: test
+  #       run: |
+  #         cat ./test.txt ./test.txt > double.txt
+  #         echo "title" > content.md
+  #         echo "[download link](./double.txt)" >> content.md
+  #         stat double.txt
 
-      - name: Upload test
-        uses: actions/upload-artifact@v4
-        id: output-id
-        with:
-          name: test-summary
-          path: |
-            ./content.md
-          retention-days: 90
+  #     - name: Upload test
+  #       uses: actions/upload-artifact@v4
+  #       id: output-id
+  #       with:
+  #         name: test-summary
+  #         path: |
+  #           ./content.md
+  #         retention-days: 90
 
-      - name: test
-        run: |
-          echo "title" > new.md
-          echo "[download link](${{ steps.output-id.outputs.artifact-url }})" >> new.md
-          stat new.md
+  #     - name: test
+  #       run: |
+  #         echo "title" > new.md
+  #         echo "[download link](${{ steps.output-id.outputs.artifact-url }})" >> new.md
+  #         stat new.md
 
-      - name: Create or update summary issue
-        uses: peter-evans/create-issue-from-file@v5
-        id: create-issue
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          content-filepath: ./new.md
-          title: test
+  #     - name: Create or update summary issue
+  #       uses: peter-evans/create-issue-from-file@v5
+  #       id: create-issue
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         content-filepath: ./new.md
+  #         title: test
 
       
 
