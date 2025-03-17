@@ -14,7 +14,7 @@ on:
 
 jobs:
   test-job:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     # if: ${{ github.event.workflow_dispatch == 'true' }}
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +28,11 @@ jobs:
       - name: event
         run: |
           echo ${{ github.event_name }}
+
+      - name: event
+        run: |
+          locale
+
       - name: test
         if: ${{ !cancelled() }}
         run: |
